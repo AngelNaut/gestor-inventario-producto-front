@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es" class="h-100">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestor de Productos</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body class="d-flex flex-column h-100">
+    <!-- Begin page content -->
+    <main class="flex-shrink-0">
+      <div class="container">
+        <h3 class="my-4" id="titulo">Productos</h3>
+
+        <a href="nuevo.html" class="btn btn-success mb-3">Agregar Producto</a>
+
+        <table
+          class="table table-hover table-bordered"
+          aria-describedby="titulo"
+        >
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+              <th>Fecha Registro</th>
+              <th>Opciones</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <!-- Ejemplo de fila de producto -->
+            <tr>
+              <td>1</td>
+              <td>Mouse Gamer</td>
+              <td>Mouse ergonómico RGB</td>
+              <td>$25.00</td>
+              <td>100</td>
+              <td>2024-07-05</td>
+              <td>
+                <a href="edita.html?id=1" class="btn btn-warning btn-sm me-2"
+                  >Editar</a
+                >
+                <button
+                  type="button"
+                  class="btn btn-danger btn-sm"
+                  data-bs-toggle="modal"
+                  data-bs-target="#eliminaModal"
+                  data-bs-id="1"
+                >
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+            <!-- Repetir para más productos -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <footer class="footer mt-auto py-3 bg-body-tertiary">
+      <div class="container">
+        <span class="text-body-secondary">2024 | Gestor de Productos</span>
+      </div>
+    </footer>
+
+    <!-- Modal de Confirmación para Eliminar -->
+    <div
+      class="modal fade"
+      id="eliminaModal"
+      tabindex="-1"
+      aria-labelledby="eliminaModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="eliminaModalLabel">
+              Confirmar Eliminación
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>¿Deseas eliminar este producto?</p>
+          </div>
+          <div class="modal-footer">
+            <form id="form-elimina" action="" method="post">
+              <input type="hidden" name="_method" value="delete" />
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancelar
+              </button>
+              <button type="submit" class="btn btn-danger">Eliminar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      const eliminaModal = document.getElementById("eliminaModal");
+      if (eliminaModal) {
+        eliminaModal.addEventListener("show.bs.modal", (event) => {
+          const button = event.relatedTarget;
+          const id = button.getAttribute("data-bs-id");
+          const form = eliminaModal.querySelector("#form-elimina");
+          form.setAttribute("action", "elimina.html?id=" + id);
+        });
+      }
+    </script>
+  </body>
+</html>
